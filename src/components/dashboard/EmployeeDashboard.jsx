@@ -3,11 +3,11 @@ import Header from '../EmployeeComponents/Header'
 import TaskListNumber from '../EmployeeComponents/TaskListNumber'
 import TaskList from '../TaskList/TaskList'
 
-const EmployeeDashboard = () => {
+const EmployeeDashboard = ({ data, handleLogout }) => {
   const [darkMode, setDarkMode] = useState(false)
 
   const toggleTheme = () => {
-    setDarkMode(!darkMode)
+    setDarkMode((previousMode) => !previousMode)
   }
 
   return (
@@ -19,11 +19,19 @@ const EmployeeDashboard = () => {
       <Header
         darkMode={darkMode}
         toggleTheme={toggleTheme}
+        data={data}
+        handleLogout={handleLogout}
       />
 
-      <TaskListNumber darkMode={darkMode} />
+      <TaskListNumber
+        darkMode={darkMode}
+        data={data}
+      />
 
-      <TaskList darkMode={darkMode} />
+      <TaskList
+        darkMode={darkMode}
+        data={data}
+      />
     </div>
   )
 }

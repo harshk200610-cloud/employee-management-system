@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TaskListNumber = ({ darkMode }) => {
+const TaskListNumber = ({ darkMode, data }) => {
   return (
     <div className='mt-5 w-full min-w-0 overflow-x-auto overflow-y-hidden scrollbar-hide'>
 
@@ -18,11 +18,11 @@ const TaskListNumber = ({ darkMode }) => {
 
           <div>
             <h2 className='text-4xl font-bold tracking-tight text-rose-950'>
-              0
+              {data.taskNumber.failed}
             </h2>
 
             <h3 className='mt-1 text-sm font-medium text-rose-800'>
-              New Task
+              Accept Task
             </h3>
           </div>
         </div>
@@ -39,7 +39,7 @@ const TaskListNumber = ({ darkMode }) => {
 
           <div>
             <h2 className='text-4xl font-bold tracking-tight text-amber-950'>
-              0
+              {data.taskNumber.completed}
             </h2>
 
             <h3 className='mt-1 text-sm font-medium text-amber-900'>
@@ -60,7 +60,8 @@ const TaskListNumber = ({ darkMode }) => {
 
           <div>
             <h2 className='text-4xl font-bold tracking-tight text-emerald-950'>
-              0
+              {data.taskNumber.completed}
+
             </h2>
 
             <h3 className='mt-1 text-sm font-medium text-emerald-900'>
@@ -81,7 +82,8 @@ const TaskListNumber = ({ darkMode }) => {
 
           <div>
             <h2 className='text-4xl font-bold tracking-tight text-red-950'>
-              0
+              {data.taskNumber.failed}
+
             </h2>
 
             <h3 className='mt-1 text-sm font-medium text-red-900'>
@@ -102,7 +104,7 @@ const TaskListNumber = ({ darkMode }) => {
 
           <div>
             <h2 className='text-4xl font-bold tracking-tight text-indigo-950'>
-              0
+              {data.taskNumber.active}
             </h2>
 
             <h3 className='mt-1 text-sm font-medium text-indigo-900'>
@@ -123,7 +125,7 @@ const TaskListNumber = ({ darkMode }) => {
 
           <div>
             <h2 className='text-4xl font-bold tracking-tight text-purple-950'>
-              0
+              {data.taskNumber.active}
             </h2>
 
             <h3 className='mt-1 text-sm font-medium text-purple-900'>
@@ -132,47 +134,9 @@ const TaskListNumber = ({ darkMode }) => {
           </div>
         </div>
 
-        {/* Review Tasks */}
-        <div className='flex h-32 w-60 shrink-0 flex-col justify-between rounded-3xl bg-[#f3dfc7] p-5 shadow-sm sm:w-64'>
-          <div className='flex items-center justify-between'>
-            <span className='text-xs font-semibold uppercase tracking-widest text-orange-800'>
-              Tasks
-            </span>
+        
 
-            <span className='text-lg text-orange-800'>↗</span>
-          </div>
-
-          <div>
-            <h2 className='text-4xl font-bold tracking-tight text-orange-950'>
-              0
-            </h2>
-
-            <h3 className='mt-1 text-sm font-medium text-orange-900'>
-              Under Review
-            </h3>
-          </div>
-        </div>
-
-        {/* Total Tasks */}
-        <div className='flex h-32 w-60 shrink-0 flex-col justify-between rounded-3xl bg-[#d8dedb] p-5 shadow-sm sm:w-64'>
-          <div className='flex items-center justify-between'>
-            <span className='text-xs font-semibold uppercase tracking-widest text-slate-700'>
-              Tasks
-            </span>
-
-            <span className='text-lg text-slate-700'>↗</span>
-          </div>
-
-          <div>
-            <h2 className='text-4xl font-bold tracking-tight text-slate-950'>
-              0
-            </h2>
-
-            <h3 className='mt-1 text-sm font-medium text-slate-800'>
-              Total Tasks
-            </h3>
-          </div>
-        </div>
+        
 
       </div>
     </div>

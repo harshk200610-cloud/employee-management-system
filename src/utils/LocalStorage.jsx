@@ -2,314 +2,317 @@
 const employees = [
   {
     id: 1,
+    firstName: "Harsh",
     email: "employee1@gmail.com",
     password: "Emp@1234",
+
     tasks: [
       {
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
-        title: "Design Login Page",
-        description: "Create a responsive login page using React and Tailwind CSS.",
-        date: "2026-09-16",
-        category: "Frontend"
-      },
-      {
+        title: "Prepare project report",
+        description: "Complete the project report and submit it.",
+        date: "2026-09-15",
+        category: "Documentation",
         active: true,
         newTask: false,
         completed: false,
         failed: false,
-        title: "Fix Navbar Bug",
-        description: "Resolve the responsive navigation issue on mobile screens.",
-        date: "2026-09-17",
-        category: "Bug Fix"
       },
       {
+        title: "Attend team meeting",
+        description: "Attend the weekly team meeting.",
+        date: "2026-09-16",
+        category: "Meeting",
+        active: true,
+        newTask: false,
+        completed: false,
+        failed: false,
+      },
+      {
+        title: "Update website",
+        description: "Update the company website content.",
+        date: "2026-09-17",
+        category: "Development",
+        active: false,
+        newTask: true,
+        completed: false,
+        failed: false,
+      },
+      {
+        title: "Submit assignment",
+        description: "Submit the assigned college work.",
+        date: "2026-09-18",
+        category: "Assignment",
         active: false,
         newTask: false,
         completed: true,
         failed: false,
-        title: "Create Project Structure",
-        description: "Set up the basic folder structure for the employee management project.",
-        date: "2026-09-14",
-        category: "Development"
       },
       {
+        title: "Fix login bug",
+        description: "Resolve the login authentication issue.",
+        date: "2026-09-19",
+        category: "Development",
         active: false,
         newTask: false,
         completed: false,
         failed: true,
-        title: "Update Documentation",
-        description: "Update the project README with installation and usage instructions.",
-        date: "2026-09-13",
-        category: "Documentation"
-      }
-    ]
+      },
+    ],
+
+    taskNumber: {
+      active: 2,
+      newTask: 1,
+      completed: 1,
+      failed: 1,
+      total: 5,
+    },
   },
 
   {
     id: 2,
+    firstName: "Rohit",
     email: "employee2@gmail.com",
     password: "Emp@2345",
+
     tasks: [
       {
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
-        title: "Build Dashboard UI",
-        description: "Create the employee dashboard layout with reusable components.",
-        date: "2026-09-18",
-        category: "Frontend"
-      },
-      {
+        title: "Design dashboard",
+        description: "Create the dashboard design.",
+        date: "2026-09-15",
+        category: "Design",
         active: true,
         newTask: false,
         completed: false,
         failed: false,
-        title: "Implement Search",
-        description: "Add search functionality to filter employees by name or email.",
-        date: "2026-09-19",
-        category: "Feature"
       },
       {
+        title: "Prepare presentation",
+        description: "Prepare slides for the client presentation.",
+        date: "2026-09-16",
+        category: "Presentation",
+        active: true,
+        newTask: false,
+        completed: false,
+        failed: false,
+      },
+      {
+        title: "Research competitors",
+        description: "Research competitor products.",
+        date: "2026-09-17",
+        category: "Research",
+        active: false,
+        newTask: true,
+        completed: false,
+        failed: false,
+      },
+      {
+        title: "Complete documentation",
+        description: "Complete the technical documentation.",
+        date: "2026-09-18",
+        category: "Documentation",
         active: false,
         newTask: false,
         completed: true,
         failed: false,
-        title: "Setup React Router",
-        description: "Configure routing between login, dashboard, and profile pages.",
-        date: "2026-09-15",
-        category: "React"
-      }
-    ]
+      },
+    ],
+
+    taskNumber: {
+      active: 2,
+      newTask: 1,
+      completed: 1,
+      failed: 0,
+      total: 4,
+    },
   },
 
   {
     id: 3,
+    firstName: "Aarav",
     email: "employee3@gmail.com",
     password: "Emp@3456",
+
     tasks: [
       {
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
-        title: "Create API Endpoints",
-        description: "Develop backend endpoints for employee authentication.",
-        date: "2026-09-20",
-        category: "Backend"
-      },
-      {
+        title: "Test application",
+        description: "Test all major application features.",
+        date: "2026-09-15",
+        category: "Testing",
         active: true,
         newTask: false,
         completed: false,
         failed: false,
-        title: "Connect MySQL Database",
-        description: "Connect the backend application to the MySQL database.",
-        date: "2026-09-21",
-        category: "Database"
       },
       {
+        title: "Fix UI issues",
+        description: "Fix the reported user interface issues.",
+        date: "2026-09-16",
+        category: "Development",
+        active: true,
+        newTask: false,
+        completed: false,
+        failed: false,
+      },
+      {
+        title: "Update test cases",
+        description: "Update the existing test cases.",
+        date: "2026-09-17",
+        category: "Testing",
+        active: false,
+        newTask: true,
+        completed: false,
+        failed: false,
+      },
+      {
+        title: "Submit testing report",
+        description: "Submit the final testing report.",
+        date: "2026-09-18",
+        category: "Documentation",
         active: false,
         newTask: false,
         completed: true,
         failed: false,
-        title: "Test Login API",
-        description: "Test login functionality using sample employee credentials.",
-        date: "2026-09-16",
-        category: "Testing"
       },
-      {
-        active: false,
-        newTask: false,
-        completed: false,
-        failed: true,
-        title: "Fix Database Connection",
-        description: "Resolve connection errors occurring during local development.",
-        date: "2026-09-14",
-        category: "Bug Fix"
-      },
-      {
-        active: true,
-        newTask: false,
-        completed: false,
-        failed: false,
-        title: "Add Logout API",
-        description: "Implement the backend endpoint for employee logout.",
-        date: "2026-09-22",
-        category: "Backend"
-      }
-    ]
+    ],
+
+    taskNumber: {
+      active: 2,
+      newTask: 1,
+      completed: 1,
+      failed: 0,
+      total: 4,
+    },
   },
 
   {
     id: 4,
+    firstName: "Sneha",
     email: "employee4@gmail.com",
     password: "Emp@4567",
+
     tasks: [
       {
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
-        title: "Design Profile Page",
-        description: "Create a profile page to display employee details.",
-        date: "2026-09-18",
-        category: "UI Design"
-      },
-      {
-        active: true,
-        newTask: false,
-        completed: false,
-        failed: false,
-        title: "Add Edit Profile",
-        description: "Allow employees to update their profile information.",
-        date: "2026-09-20",
-        category: "Feature"
-      },
-      {
-        active: false,
-        newTask: false,
-        completed: true,
-        failed: false,
-        title: "Create Employee Cards",
-        description: "Build reusable employee cards for the dashboard.",
+        title: "Create user flow",
+        description: "Create the user flow for the application.",
         date: "2026-09-15",
-        category: "Frontend"
-      },
-      {
-        active: false,
+        category: "Design",
+        active: true,
         newTask: false,
         completed: false,
-        failed: true,
-        title: "Fix Profile Layout",
-        description: "Resolve alignment issues in the employee profile page.",
-        date: "2026-09-13",
-        category: "Bug Fix"
+        failed: false,
       },
       {
-        active: true,
+        title: "Review design",
+        description: "Review the latest application design.",
+        date: "2026-09-16",
+        category: "Design",
+        active: false,
         newTask: true,
         completed: false,
         failed: false,
-        title: "Add Profile Image",
-        description: "Allow employees to upload and display a profile image.",
-        date: "2026-09-23",
-        category: "Feature"
       },
       {
+        title: "Complete wireframes",
+        description: "Complete the application wireframes.",
+        date: "2026-09-17",
+        category: "Design",
         active: false,
         newTask: false,
         completed: true,
         failed: false,
-        title: "Review UI Components",
-        description: "Review existing components for consistency and reuse.",
-        date: "2026-09-16",
-        category: "Review"
-      }
-    ]
+      },
+    ],
+
+    taskNumber: {
+      active: 1,
+      newTask: 1,
+      completed: 1,
+      failed: 0,
+      total: 3,
+    },
   },
 
   {
     id: 5,
+    firstName: "Priya",
     email: "employee5@gmail.com",
     password: "Emp@5678",
+
     tasks: [
       {
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
-        title: "Write Unit Tests",
-        description: "Write unit tests for the employee management components.",
-        date: "2026-09-19",
-        category: "Testing"
-      },
-      {
+        title: "Prepare client report",
+        description: "Prepare the monthly client report.",
+        date: "2026-09-15",
+        category: "Report",
         active: true,
         newTask: false,
         completed: false,
         failed: false,
-        title: "Test Dashboard",
-        description: "Test dashboard functionality across different screen sizes.",
-        date: "2026-09-20",
-        category: "Testing"
       },
       {
+        title: "Send project update",
+        description: "Send the project update to the manager.",
+        date: "2026-09-16",
+        category: "Communication",
+        active: false,
+        newTask: true,
+        completed: false,
+        failed: false,
+      },
+      {
+        title: "Complete assigned work",
+        description: "Complete the assigned project work.",
+        date: "2026-09-17",
+        category: "Development",
         active: false,
         newTask: false,
         completed: true,
         failed: false,
-        title: "Review Task Component",
-        description: "Review the TaskList component and suggest improvements.",
-        date: "2026-09-15",
-        category: "Review"
       },
       {
+        title: "Resolve pending issue",
+        description: "Resolve the pending project issue.",
+        date: "2026-09-18",
+        category: "Development",
         active: false,
         newTask: false,
         completed: false,
         failed: true,
-        title: "Fix Test Failures",
-        description: "Resolve failing tests in the task management module.",
-        date: "2026-09-14",
-        category: "Bug Fix"
       },
-      {
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
-        title: "Prepare Test Report",
-        description: "Prepare a report describing test results and identified issues.",
-        date: "2026-09-22",
-        category: "Documentation"
-      },
-      {
-        active: true,
-        newTask: false,
-        completed: false,
-        failed: false,
-        title: "Perform Integration Testing",
-        description: "Test the integration between frontend and backend modules.",
-        date: "2026-09-24",
-        category: "Testing"
-      },
-      {
-        active: false,
-        newTask: false,
-        completed: true,
-        failed: false,
-        title: "Setup Testing Environment",
-        description: "Configure the testing environment for the project.",
-        date: "2026-09-16",
-        category: "Testing"
-      }
-    ]
-  }
+    ],
+
+    taskNumber: {
+      active: 1,
+      newTask: 1,
+      completed: 1,
+      failed: 1,
+      total: 4,
+    },
+  },
 ];
 
 const admin = [
   {
     id: 101,
+    firstName: "Vikram",
     email: "admin@gmail.com",
-    password: "Adm@1234"
-  }
+    password: "Adm@1234",
+  },
 ];
 
 export { employees, admin };
 
-export const  setLocalStorage = () =>{
-    localStorage.setItem('employees', JSON.stringify(employees))
-    localStorage.setItem('admin', JSON.stringify(admin))
-}
+export const setLocalStorage = () => {
+localStorage.setItem('employees', JSON.stringify(employees));
+localStorage.setItem('admin', JSON.stringify(admin));
+};
 
-export const getLocalStorage = () =>{
-   const employees =  JSON.parse(localStorage.getItem('employees'))
-   const admin =  JSON.parse(localStorage.getItem('admin'))
-   console.log(employees, admin);
-   
-   
-}
+export const getLocalStorage = () => {
+const employees = JSON.parse(localStorage.getItem('employees')) || [];
+const admin = JSON.parse(localStorage.getItem('admin')) || [];
+
+
+return { employees, admin };
+
+
+};

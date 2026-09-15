@@ -1,6 +1,11 @@
 import React from 'react'
 
-const Header = ({ darkMode, toggleTheme }) => {
+const Header = ({
+  darkMode,
+  toggleTheme,
+  data,
+  handleLogout,
+}) => {
   return (
     <header
       className={`flex shrink-0 items-center justify-between rounded-3xl border px-5 py-5 shadow-sm transition-colors duration-300 sm:px-7 ${
@@ -23,8 +28,8 @@ const Header = ({ darkMode, toggleTheme }) => {
             darkMode ? 'text-stone-100' : 'text-stone-900'
           }`}
         >
-          Hello, Harsh
-          <span className='ml-2 inline-block'>👋</span>
+          Hello, {data?.firstName || 'Employee'}
+          <span className="ml-2 inline-block">👋</span>
         </h1>
 
         <p
@@ -36,13 +41,11 @@ const Header = ({ darkMode, toggleTheme }) => {
         </p>
       </div>
 
-      <div className='flex items-center gap-2 sm:gap-3'>
-
-        {/* Theme Toggle */}
+      <div className="flex items-center gap-2 sm:gap-3">
         <button
-          type='button'
+          type="button"
           onClick={toggleTheme}
-          aria-label='Toggle dark and light theme'
+          aria-label="Toggle dark and light theme"
           className={`flex h-11 w-11 items-center justify-center rounded-xl border text-xl transition ${
             darkMode
               ? 'border-stone-600 bg-stone-800 text-yellow-300 hover:bg-stone-700'
@@ -52,9 +55,9 @@ const Header = ({ darkMode, toggleTheme }) => {
           {darkMode ? '☀️' : '🌙'}
         </button>
 
-        {/* Logout */}
         <button
-          type='button'
+          type="button"
+          onClick={handleLogout}
           className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition sm:px-6 ${
             darkMode
               ? 'bg-stone-100 text-stone-900 hover:bg-stone-300'
@@ -63,7 +66,6 @@ const Header = ({ darkMode, toggleTheme }) => {
         >
           Logout
         </button>
-
       </div>
     </header>
   )
