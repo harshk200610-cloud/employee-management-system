@@ -1,15 +1,15 @@
 import React from 'react'
 
-const NewTask = () => {
+const NewTask = ({data}) => {
   return (
     <div className="flex h-full min-h-[280px] w-[clamp(280px,24vw,360px)] shrink-0 flex-col overflow-hidden rounded-3xl bg-[#dce9f7] p-5 shadow-sm sm:p-6">
       <div className="flex items-center justify-between gap-3">
         <h3 className="rounded-full bg-sky-600 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-white">
-          Medium
+          {data.category}
         </h3>
 
         <h4 className="whitespace-nowrap text-xs font-medium text-sky-950">
-          14 Sept 2026
+          {data.date}
         </h4>
       </div>
 
@@ -18,19 +18,15 @@ const NewTask = () => {
           New Task
         </p>
 
-        <h3 className="mb-2 break-words text-sm font-medium text-sky-700">
-          UI Design
-        </h3>
+       
 
         <h2 className="break-words text-2xl font-semibold leading-tight tracking-tight text-sky-950">
-          Create Dashboard Layout
+          {data.title}
         </h2>
 
         <div className="scrollbar-hide mt-4 min-h-0 flex-1 overflow-y-auto">
           <p className="break-words text-sm leading-6 text-sky-900">
-            Design a clean and responsive dashboard layout for employees.
-            Make sure the layout works properly on desktop, tablet, and
-            mobile devices.
+            {data.description}
           </p>
         </div>
       </div>

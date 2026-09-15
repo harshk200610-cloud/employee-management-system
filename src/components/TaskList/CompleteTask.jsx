@@ -1,15 +1,15 @@
 import React from 'react'
 
-const CompleteTask = () => {
+const CompleteTask = ({data}) => {
   return (
     <div className="flex h-full min-h-[280px] w-[clamp(280px,24vw,360px)] shrink-0 flex-col overflow-hidden rounded-3xl bg-[#e8ddf7] p-5 shadow-sm sm:p-6">
       <div className="flex items-center justify-between gap-3">
         <h3 className="rounded-full bg-purple-600 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-white">
-          Low
+          {data.category}
         </h3>
 
         <h4 className="whitespace-nowrap text-xs font-medium text-purple-950">
-          15 Sept 2026
+          {data.date}
         </h4>
       </div>
 
@@ -18,18 +18,15 @@ const CompleteTask = () => {
           Complete Task
         </p>
 
-        <h3 className="mb-2 break-words text-sm font-medium text-purple-700">
-          Backend
-        </h3>
+        
 
         <h2 className="break-words text-2xl font-semibold leading-tight tracking-tight text-purple-950">
-          Connect Backend API
+          {data.title}
         </h2>
 
         <div className="scrollbar-hide mt-4 min-h-0 flex-1 overflow-y-auto">
           <p className="break-words text-sm leading-6 text-purple-900">
-            Connect the frontend dashboard with the backend API. Integrate
-            the required endpoints and test the response from the server.
+            {data.description}
           </p>
         </div>
       </div>

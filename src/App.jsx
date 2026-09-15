@@ -1,8 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
+
 import Login from './components/Auth/Login'
 import EmployeeDashboard from './components/dashboard/EmployeeDashboard'
 import AdminDashboard from './components/dashboard/AdminDashboard'
+
 import { AuthContext } from './context/AuthProvider'
+import { useTasks } from './context/TaskContext'
 
 const App = () => {
   const [user, setUser] = useState(null)
@@ -10,10 +17,10 @@ const App = () => {
   const [isSessionChecked, setIsSessionChecked] = useState(false)
 
   const authData = useContext(AuthContext)
+  const { employees } = useTasks()
 
-  // Restore the session after page reload
   useEffect(() => {
-    if (!authData) {
+    if (!authData || employees.length === 0) {
       return
     }
 
@@ -21,18 +28,40 @@ const App = () => {
 
     if (loggedInUser) {
       try {
-        const userData = JSON.parse(loggedInUser)
+        const sessionData = JSON.parse(loggedInUser)
 
-        setUser(userData.role)
-        setLoggedInUserData(userData.data)
+        setUser(sessionData.role)
+
+        if (sessionData.role === 'employee') {
+          const updatedEmployee = employees.find(
+            (employee) => employee.id === sessionData.data.id
+          )
+
+          setLoggedInUserData(updatedEmployee)
+        } else {
+          setLoggedInUserData(sessionData.data)
+        }
       } catch (error) {
-        console.error('Invalid login session:', error)
         localStorage.removeItem('loggedInUser')
       }
     }
 
     setIsSessionChecked(true)
-  }, [authData])
+  }, [authData, employees])
+
+  useEffect(() => {
+    if (user !== 'employee' || !loggedInUserData) {
+      return
+    }
+
+    const updatedEmployee = employees.find(
+      (employee) => employee.id === loggedInUserData.id
+    )
+
+    if (updatedEmployee) {
+      setLoggedInUserData(updatedEmployee)
+    }
+  }, [employees, user])
 
   const handleLogin = (email, password) => {
     if (!authData) {
@@ -60,7 +89,7 @@ const App = () => {
       return
     }
 
-    const employee = authData.employees.find(
+    const employee = employees.find(
       (employee) =>
         employee.email === email &&
         employee.password === password
@@ -101,6 +130,7 @@ const App = () => {
       {user === 'admin' && (
         <AdminDashboard
           data={loggedInUserData}
+          employees={employees}
           handleLogout={handleLogout}
         />
       )}

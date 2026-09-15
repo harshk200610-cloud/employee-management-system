@@ -1,161 +1,92 @@
 import React from 'react'
+import { useTasks } from '../../context/TaskContext'
 
 const AllTask = () => {
-  return (
-    <div className='flex h-full min-h-0 flex-col overflow-hidden rounded-2xl bg-[#292722] p-4 sm:p-5'>
+  const { employees, deleteCompletedTask } = useTasks()
 
-      <div className='mb-4 shrink-0'>
-        <h2 className='text-xl font-semibold text-[#f5f1e8]'>
+  const allTasks = employees.flatMap((employee) =>
+    employee.tasks.map((task) => ({
+      ...task,
+      employeeId: employee.id,
+      employeeName: employee.firstName,
+    }))
+  )
+
+  const getStatus = (task) => {
+    if (task.completed) return 'Completed'
+    if (task.failed) return 'Failed'
+    if (task.active) return 'In Progress'
+    if (task.newTask) return 'New Task'
+
+    return 'Pending'
+  }
+
+  return (
+    <div className="flex h-full min-h-0 flex-col overflow-hidden rounded-2xl bg-[#292722] p-4 sm:p-5">
+      <div className="mb-4 shrink-0">
+        <h2 className="text-xl font-semibold text-[#f5f1e8]">
           All Tasks
         </h2>
 
-        <p className='text-sm text-[#bdb7aa]'>
+        <p className="text-sm text-[#bdb7aa]">
           View all assigned tasks
         </p>
       </div>
 
-      <div className='task-scroll min-h-0 flex-1 space-y-4 overflow-y-auto pr-1'>
-
-        <div className='rounded-xl bg-[#383732] p-4 text-[#f5f1e8]'>
-          <div className='flex items-center justify-between gap-3'>
-            <h3 className='font-semibold'>Design Landing Page</h3>
-
-            <span className='shrink-0 rounded-full bg-amber-500 px-3 py-1 text-xs text-black'>
-              Pending
-            </span>
-          </div>
-
-          <p className='mt-2 text-sm text-[#c7c1b5]'>
-            Create a responsive landing page for the product.
+      <div className="task-scroll min-h-0 flex-1 space-y-4 overflow-y-auto pr-1">
+        {allTasks.length === 0 && (
+          <p className="text-sm text-stone-400">
+            No tasks available.
           </p>
-        </div>
+        )}
 
-        <div className='rounded-xl bg-[#383732] p-4 text-[#f5f1e8]'>
-          <div className='flex items-center justify-between gap-3'>
-            <h3 className='font-semibold'>Build Login Page</h3>
+        {allTasks.map((task) => (
+          <div
+            key={`${task.employeeId}-${task.id}`}
+            className="rounded-xl bg-[#383732] p-4 text-[#f5f1e8]"
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h3 className="font-semibold">
+                  {task.title}
+                </h3>
 
-            <span className='shrink-0 rounded-full bg-emerald-500 px-3 py-1 text-xs text-black'>
-              Completed
-            </span>
+                <p className="mt-1 text-xs text-amber-300">
+                  Assigned to: {task.employeeName}
+                </p>
+              </div>
+
+              <span className="shrink-0 rounded-full bg-amber-500 px-3 py-1 text-xs text-black">
+                {getStatus(task)}
+              </span>
+            </div>
+
+            <p className="mt-2 text-sm text-[#c7c1b5]">
+              {task.description}
+            </p>
+
+            <div className="mt-3 flex items-center justify-between gap-3">
+              <p className="text-xs text-stone-400">
+                {task.date}
+              </p>
+
+              {task.completed && (
+                <button
+                  type="button"
+                  onClick={() =>
+                    deleteCompletedTask(
+                      task.employeeId,
+                      task.id
+                    )
+                  }
+                  className="rounded-lg bg-red-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-red-700"
+                >
+                  Delete Completed Task
+                </button>
+              )}
+            </div>
           </div>
-
-          <p className='mt-2 text-sm text-[#c7c1b5]'>
-            Develop the login page with form validation.
-          </p>
-        </div>
-
-        <div className='rounded-xl bg-[#383732] p-4 text-[#f5f1e8]'>
-          <div className='flex items-center justify-between gap-3'>
-            <h3 className='font-semibold'>Create Dashboard</h3>
-
-            <span className='shrink-0 rounded-full bg-orange-400 px-3 py-1 text-xs text-black'>
-              In Progress
-            </span>
-          </div>
-
-          <p className='mt-2 text-sm text-[#c7c1b5]'>
-            Create the employee management dashboard.
-          </p>
-        </div>
-
-        <div className='rounded-xl bg-[#383732] p-4 text-[#f5f1e8]'>
-          <div className='flex items-center justify-between gap-3'>
-            <h3 className='font-semibold'>Connect Backend</h3>
-
-            <span className='shrink-0 rounded-full bg-amber-500 px-3 py-1 text-xs text-black'>
-              Pending
-            </span>
-          </div>
-
-          <p className='mt-2 text-sm text-[#c7c1b5]'>
-            Connect the dashboard with the backend API.
-          </p>
-        </div>
-
-        <div className='rounded-xl bg-[#383732] p-4 text-[#f5f1e8]'>
-          <div className='flex items-center justify-between gap-3'>
-            <h3 className='font-semibold'>Testing</h3>
-
-            <span className='shrink-0 rounded-full bg-orange-400 px-3 py-1 text-xs text-black'>
-              In Progress
-            </span>
-          </div>
-
-          <p className='mt-2 text-sm text-[#c7c1b5]'>
-            Test all dashboard features and fix errors.
-          </p>
-        </div>
-
-        <div className='rounded-xl bg-[#383732] p-4 text-[#f5f1e8]'>
-          <div className='flex items-center justify-between gap-3'>
-            <h3 className='font-semibold'>Deploy Application</h3>
-
-            <span className='shrink-0 rounded-full bg-amber-500 px-3 py-1 text-xs text-black'>
-              Pending
-            </span>
-          </div>
-
-          <p className='mt-2 text-sm text-[#c7c1b5]'>
-            Deploy the application to a hosting platform.
-          </p>
-        </div>
-
-        <div className='rounded-xl bg-[#383732] p-4 text-[#f5f1e8]'>
-          <div className='flex items-center justify-between gap-3'>
-            <h3 className='font-semibold'>Database Setup</h3>
-
-            <span className='shrink-0 rounded-full bg-amber-500 px-3 py-1 text-xs text-black'>
-              Pending
-            </span>
-          </div>
-
-          <p className='mt-2 text-sm text-[#c7c1b5]'>
-            Create the required database tables and relationships.
-          </p>
-        </div>
-
-        <div className='rounded-xl bg-[#383732] p-4 text-[#f5f1e8]'>
-          <div className='flex items-center justify-between gap-3'>
-            <h3 className='font-semibold'>API Integration</h3>
-
-            <span className='shrink-0 rounded-full bg-orange-400 px-3 py-1 text-xs text-black'>
-              In Progress
-            </span>
-          </div>
-
-          <p className='mt-2 text-sm text-[#c7c1b5]'>
-            Integrate frontend components with backend APIs.
-          </p>
-        </div>
-
-        <div className='rounded-xl bg-[#383732] p-4 text-[#f5f1e8]'>
-          <div className='flex items-center justify-between gap-3'>
-            <h3 className='font-semibold'>User Authentication</h3>
-
-            <span className='shrink-0 rounded-full bg-emerald-500 px-3 py-1 text-xs text-black'>
-              Completed
-            </span>
-          </div>
-
-          <p className='mt-2 text-sm text-[#c7c1b5]'>
-            Implement login, logout, and protected routes.
-          </p>
-        </div>
-
-        <div className='rounded-xl bg-[#383732] p-4 text-[#f5f1e8]'>
-          <div className='flex items-center justify-between gap-3'>
-            <h3 className='font-semibold'>Final Review</h3>
-
-            <span className='shrink-0 rounded-full bg-amber-500 px-3 py-1 text-xs text-black'>
-              Pending
-            </span>
-          </div>
-
-          <p className='mt-2 text-sm text-[#c7c1b5]'>
-            Review the complete application before submission.
-          </p>
-        </div>
-
+        ))}
       </div>
     </div>
   )

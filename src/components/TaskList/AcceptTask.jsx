@@ -1,15 +1,15 @@
 import React from 'react'
 
-const AcceptTask = () => {
+const AcceptTask = ({data}) => {
   return (
     <div className="flex h-full min-h-[280px] w-[clamp(280px,24vw,360px)] shrink-0 flex-col overflow-hidden rounded-3xl bg-[#d9f0df] p-5 shadow-sm sm:p-6">
       <div className="flex items-center justify-between gap-3">
-        <h3 className="rounded-full bg-emerald-600 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-white">
-          High
+        <h3 className="rounded-full bg-green-600 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-white">
+          {data.category}
         </h3>
 
         <h4 className="whitespace-nowrap text-xs font-medium text-emerald-950">
-          14 Sept 2026
+          {data.date}
         </h4>
       </div>
 
@@ -18,18 +18,15 @@ const AcceptTask = () => {
           Accepted Task
         </p>
 
-        <h3 className="mb-2 break-words text-sm font-medium text-emerald-700">
-          Frontend
-        </h3>
+       
 
         <h2 className="break-words text-2xl font-semibold leading-tight tracking-tight text-emerald-950">
-          Develop Login Authentication
+          {data.title}
         </h2>
 
         <div className="scrollbar-hide mt-4 min-h-0 flex-1 overflow-y-auto">
           <p className="break-words text-sm leading-6 text-emerald-900">
-            Develop login authentication and improve the user interface.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum
+            {data.description}
           </p>
         </div>
       </div>
