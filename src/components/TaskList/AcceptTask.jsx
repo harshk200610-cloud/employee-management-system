@@ -1,6 +1,16 @@
 import React from 'react'
 
-const AcceptTask = ({data}) => {
+import { useTasks } from '../../context/TaskContext'
+
+const AcceptTask = ({
+  data,
+  employeeId,
+}) => {
+  const {
+    completeTask,
+    failTask,
+  } = useTasks()
+
   return (
     <div className="flex h-full min-h-[280px] w-[clamp(280px,24vw,360px)] shrink-0 flex-col overflow-hidden rounded-3xl bg-[#d9f0df] p-5 shadow-sm sm:p-6">
       <div className="flex items-center justify-between gap-3">
@@ -18,8 +28,6 @@ const AcceptTask = ({data}) => {
           Accepted Task
         </p>
 
-       
-
         <h2 className="break-words text-2xl font-semibold leading-tight tracking-tight text-emerald-950">
           {data.title}
         </h2>
@@ -34,6 +42,9 @@ const AcceptTask = ({data}) => {
       <div className="mt-5 flex flex-wrap gap-3">
         <button
           type="button"
+          onClick={() =>
+            completeTask(employeeId, data.id)
+          }
           className="flex-1 rounded-xl bg-emerald-700 px-4 py-3 text-xs font-semibold text-white transition duration-300 hover:bg-emerald-800 active:scale-[0.98]"
         >
           Mark as Completed
@@ -41,6 +52,9 @@ const AcceptTask = ({data}) => {
 
         <button
           type="button"
+          onClick={() =>
+            failTask(employeeId, data.id)
+          }
           className="flex-1 rounded-xl border border-red-600 bg-red-600 px-4 py-3 text-xs font-semibold text-white transition duration-300 hover:bg-red-700 active:scale-[0.98]"
         >
           Mark as Failed

@@ -1,6 +1,17 @@
 import React from 'react'
 
-const NewTask = ({data}) => {
+import { useTasks } from '../../context/TaskContext'
+
+const NewTask = ({
+  data,
+  employeeId,
+}) => {
+  const { acceptTask } = useTasks()
+
+  const handleAcceptTask = () => {
+    acceptTask(employeeId, data.id)
+  }
+
   return (
     <div className="flex h-full min-h-[280px] w-[clamp(280px,24vw,360px)] shrink-0 flex-col overflow-hidden rounded-3xl bg-[#dce9f7] p-5 shadow-sm sm:p-6">
       <div className="flex items-center justify-between gap-3">
@@ -18,8 +29,6 @@ const NewTask = ({data}) => {
           New Task
         </p>
 
-       
-
         <h2 className="break-words text-2xl font-semibold leading-tight tracking-tight text-sky-950">
           {data.title}
         </h2>
@@ -34,6 +43,7 @@ const NewTask = ({data}) => {
       <div className="mt-5 flex flex-wrap gap-3">
         <button
           type="button"
+          onClick={handleAcceptTask}
           className="flex-1 rounded-xl bg-sky-700 px-4 py-3 text-xs font-semibold text-white transition duration-300 hover:bg-sky-800 active:scale-[0.98]"
         >
           Accept Task

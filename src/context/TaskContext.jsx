@@ -7,7 +7,6 @@ import React, {
 
 import {
   getLocalStorage,
-  setLocalStorage,
 } from '../utils/LocalStorage'
 
 export const TaskContext = createContext(null)
@@ -21,14 +20,35 @@ const TaskProvider = ({ children }) => {
     setEmployees(storedData.employees || [])
   }, [])
 
-  const calculateTaskNumber = (tasks) => {
+  const calculateTaskNumber = (tasks = []) => {
     return {
-      active: tasks.filter((task) => task.active).length,
-      newTask: tasks.filter((task) => task.newTask).length,
-      completed: tasks.filter((task) => task.completed).length,
-      failed: tasks.filter((task) => task.failed).length,
+      newTask: tasks.filter(
+        (task) => task.newTask === true
+      ).length,
+
+      active: tasks.filter(
+        (task) => task.active === true
+      ).length,
+
+      completed: tasks.filter(
+        (task) => task.completed === true
+      ).length,
+
+      failed: tasks.filter(
+        (task) => task.failed === true
+      ).length,
+
       total: tasks.length,
     }
+  }
+
+  const saveEmployees = (updatedEmployees) => {
+    localStorage.setItem(
+      'employees',
+      JSON.stringify(updatedEmployees)
+    )
+
+    setEmployees(updatedEmployees)
   }
 
   const assignTask = ({
@@ -40,70 +60,159 @@ const TaskProvider = ({ children }) => {
   }) => {
     const newTask = {
       id: Date.now(),
+
       title,
       description,
       date,
       category,
 
-      active: false,
       newTask: true,
+      active: false,
       completed: false,
       failed: false,
     }
 
-    setEmployees((previousEmployees) => {
-      const updatedEmployees = previousEmployees.map((employee) => {
-        if (employee.id !== Number(employeeId)) {
-          return employee
+    const updatedEmployees = employees.map((employee) => {
+      if (employee.id !== Number(employeeId)) {
+        return employee
+      }
+
+      const updatedTasks = [
+        ...(employee.tasks || []),
+        newTask,
+      ]
+
+      return {
+        ...employee,
+        tasks: updatedTasks,
+        taskNumber: calculateTaskNumber(updatedTasks),
+      }
+    })
+
+    saveEmployees(updatedEmployees)
+  }
+
+  const acceptTask = (employeeId, taskId) => {
+    const updatedEmployees = employees.map((employee) => {
+      if (employee.id !== Number(employeeId)) {
+        return employee
+      }
+
+      const updatedTasks = employee.tasks.map((task) => {
+        if (task.id !== taskId) {
+          return task
         }
 
-        const updatedTasks = [...employee.tasks, newTask]
-
         return {
-          ...employee,
-          tasks: updatedTasks,
-          taskNumber: calculateTaskNumber(updatedTasks),
+          ...task,
+
+          newTask: false,
+          active: true,
+          completed: false,
+          failed: false,
         }
       })
 
-      localStorage.setItem(
-        'employees',
-        JSON.stringify(updatedEmployees)
-      )
-
-      return updatedEmployees
+      return {
+        ...employee,
+        tasks: updatedTasks,
+        taskNumber: calculateTaskNumber(updatedTasks),
+      }
     })
+
+    saveEmployees(updatedEmployees)
+
+    alert('Task accepted successfully')
+  }
+
+  const completeTask = (employeeId, taskId) => {
+    const updatedEmployees = employees.map((employee) => {
+      if (employee.id !== Number(employeeId)) {
+        return employee
+      }
+
+      const updatedTasks = employee.tasks.map((task) => {
+        if (task.id !== taskId) {
+          return task
+        }
+
+        return {
+          ...task,
+
+          newTask: false,
+          active: false,
+          completed: true,
+          failed: false,
+        }
+      })
+
+      return {
+        ...employee,
+        tasks: updatedTasks,
+        taskNumber: calculateTaskNumber(updatedTasks),
+      }
+    })
+
+    saveEmployees(updatedEmployees)
+
+    alert('Task completed successfully')
+  }
+
+  const failTask = (employeeId, taskId) => {
+    const updatedEmployees = employees.map((employee) => {
+      if (employee.id !== Number(employeeId)) {
+        return employee
+      }
+
+      const updatedTasks = employee.tasks.map((task) => {
+        if (task.id !== taskId) {
+          return task
+        }
+
+        return {
+          ...task,
+
+          newTask: false,
+          active: false,
+          completed: false,
+          failed: true,
+        }
+      })
+
+      return {
+        ...employee,
+        tasks: updatedTasks,
+        taskNumber: calculateTaskNumber(updatedTasks),
+      }
+    })
+
+    saveEmployees(updatedEmployees)
+
+    alert('Task marked as failed')
   }
 
   const deleteCompletedTask = (employeeId, taskId) => {
-    setEmployees((previousEmployees) => {
-      const updatedEmployees = previousEmployees.map((employee) => {
-        if (employee.id !== Number(employeeId)) {
-          return employee
-        }
+    const updatedEmployees = employees.map((employee) => {
+      if (employee.id !== Number(employeeId)) {
+        return employee
+      }
 
-        const updatedTasks = employee.tasks.filter(
-          (task) =>
-            !(
-              task.id === taskId &&
-              task.completed === true
-            )
-        )
-
-        return {
-          ...employee,
-          tasks: updatedTasks,
-          taskNumber: calculateTaskNumber(updatedTasks),
-        }
-      })
-
-      localStorage.setItem(
-        'employees',
-        JSON.stringify(updatedEmployees)
+      const updatedTasks = employee.tasks.filter(
+        (task) =>
+          !(
+            task.id === taskId &&
+            task.completed === true
+          )
       )
 
-      return updatedEmployees
+      return {
+        ...employee,
+        tasks: updatedTasks,
+        taskNumber: calculateTaskNumber(updatedTasks),
+      }
     })
+
+    saveEmployees(updatedEmployees)
   }
 
   return (
@@ -111,7 +220,11 @@ const TaskProvider = ({ children }) => {
       value={{
         employees,
         assignTask,
+        acceptTask,
+        completeTask,
+        failTask,
         deleteCompletedTask,
+        calculateTaskNumber,
       }}
     >
       {children}

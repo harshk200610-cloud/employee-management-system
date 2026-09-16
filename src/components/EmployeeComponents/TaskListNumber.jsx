@@ -4,16 +4,30 @@ const TaskListNumber = ({ data }) => {
   const tasks = data?.tasks || []
 
   const taskNumber = {
-    newTask: tasks.filter((task) => task.newTask).length,
-    active: tasks.filter((task) => task.active).length,
-    completed: tasks.filter((task) => task.completed).length,
-    failed: tasks.filter((task) => task.failed).length,
+    newTask: tasks.filter(
+      (task) => task.newTask === true
+    ).length,
+
+    active: tasks.filter(
+      (task) => task.active === true
+    ).length,
+
+    completed: tasks.filter(
+      (task) => task.completed === true
+    ).length,
+
+    failed: tasks.filter(
+      (task) => task.failed === true
+    ).length,
+
     total: tasks.length,
   }
 
   return (
     <div className="mt-5 w-full min-w-0 overflow-x-auto overflow-y-hidden scrollbar-hide">
       <div className="flex w-max gap-4 pb-1">
+
+        {/* New Tasks */}
         <div className="flex h-32 w-60 shrink-0 flex-col justify-between rounded-3xl bg-[#f8d8dc] p-5 shadow-sm sm:w-64">
           <span className="text-xs font-semibold uppercase tracking-widest text-rose-700">
             Tasks
@@ -30,6 +44,7 @@ const TaskListNumber = ({ data }) => {
           </div>
         </div>
 
+        {/* Accepted Tasks */}
         <div className="flex h-32 w-60 shrink-0 flex-col justify-between rounded-3xl bg-[#f6e5b9] p-5 shadow-sm sm:w-64">
           <span className="text-xs font-semibold uppercase tracking-widest text-amber-800">
             Tasks
@@ -46,6 +61,7 @@ const TaskListNumber = ({ data }) => {
           </div>
         </div>
 
+        {/* Completed Tasks */}
         <div className="flex h-32 w-60 shrink-0 flex-col justify-between rounded-3xl bg-[#d9e8d5] p-5 shadow-sm sm:w-64">
           <span className="text-xs font-semibold uppercase tracking-widest text-emerald-800">
             Tasks
@@ -62,6 +78,7 @@ const TaskListNumber = ({ data }) => {
           </div>
         </div>
 
+        {/* Failed Tasks */}
         <div className="flex h-32 w-60 shrink-0 flex-col justify-between rounded-3xl bg-[#f3caca] p-5 shadow-sm sm:w-64">
           <span className="text-xs font-semibold uppercase tracking-widest text-red-700">
             Tasks
@@ -78,6 +95,7 @@ const TaskListNumber = ({ data }) => {
           </div>
         </div>
 
+        {/* In Progress */}
         <div className="flex h-32 w-60 shrink-0 flex-col justify-between rounded-3xl bg-[#dce5f5] p-5 shadow-sm sm:w-64">
           <span className="text-xs font-semibold uppercase tracking-widest text-indigo-800">
             Tasks
@@ -94,6 +112,7 @@ const TaskListNumber = ({ data }) => {
           </div>
         </div>
 
+        {/* Total Tasks */}
         <div className="flex h-32 w-60 shrink-0 flex-col justify-between rounded-3xl bg-[#eadcf5] p-5 shadow-sm sm:w-64">
           <span className="text-xs font-semibold uppercase tracking-widest text-purple-800">
             Tasks
@@ -109,6 +128,7 @@ const TaskListNumber = ({ data }) => {
             </h3>
           </div>
         </div>
+
       </div>
     </div>
   )
